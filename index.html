@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Picky game</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+	<div id="fade">
+		<div class="winner hide shadow-lg">
+			<h6 style="font-size: 25px;" class="win-msg display-4 text-center text-danger"></h6>
+			<div class="d-flex justify-content-center">
+				<a href="#" class="btn btn-info shadow play-again" style="border-radius: 0px;">Play again</a>
+			</div>
+		</div>
+	</div>
+	<div class="container"><div class="row msg-box"></div></div>
+	<div class="main-wrapper mt-5 mb-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-4">
+					<div>
+						<div class="shadow color-choose p-3">
+					 		<h6 class="p-3" align="center">Choose your color</h6>
+					 		<form class="">
+					 			<div class="form-group d-flex justify-content-center">
+					 				<input id="color" type="color" name="color" class="form-control w-100">
+					 			</div>
+					 		</form>
+		 				</div>
+		 				<div class="score-card shadow mt-4 p-3">
+		 					<h5 align="center">Your score</h5>
+		 					<div class="border p-3"><h6 id="demo" class="score text-center">0</h6></div>
+		 				</div>
+					</div>
+				</div>
+				<div class="col-8 ml-auto mr-auto">
+					<div class="container">
+						<div class="row">
+							<div id="a1" class="col-4 check-box b br-tl"></div>
+							<div id="a2" class="col-4 check-box bb bt br"></div>
+							<div id="a3" class="col-4 check-box br bb bt br-tr"></div>
+
+							<div id="b1" class="col-4 check-box bl br bb"></div>
+							<div id="b2" class="col-4 check-box br bb"></div>
+							<div id="b3" class="col-4 check-box br bb"></div>
+
+							<div id="c1" class="col-4 check-box bl br bb br-bl"></div>
+							<div id="c2" class="col-4 check-box br bb"></div>
+							<div id="c3" class="col-4 check-box br bb br-br"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--
+	<div class="container mt-1 mb-4">
+		 <div class="row">
+		 	<div class="col-6 ml-auto mr-auto shadow color-choose">
+		 		<h6 class="p-3" align="center">Choose your color</h6>
+		 		<form class="p-3">
+		 			<div class="form-group d-flex justify-content-center">
+		 				<input id="color" type="color" name="color" class="form-control w-50">
+		 			</div>
+		 		</form>
+		 	</div>
+		 </div>
+	</div>
+-->
+</body>
+</html>
