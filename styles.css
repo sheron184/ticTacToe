@@ -5,7 +5,7 @@
 	tr
 }
 .check-box{
-	height: 160px;
+	height: 140px;
 	transition: background 1s;
 	cursor: pointer;
 	padding-top: 5px;
