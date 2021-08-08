@@ -36,7 +36,23 @@ $(document).ready(function(){
 	});
 
 	//====================================************============================================//
-
+	function checkedBoxes(){
+		var allcheckedboxes=0;
+			var boxArr = ['#a1','#a2','#a3','#b1','#b2','#b3','#c1','#c2','#c3'];
+			for(var q=0;q<boxArr.length;q++){
+						
+					var tt_id = boxArr[q];
+					//console.log(tt_id);
+					var tt_node = $(tt_id).find(".check-node");
+					if(tt_node.length !=0){
+							allcheckedboxes++;
+							console.log("gotvld ");
+					}
+						
+			}
+			console.log(allcheckedboxes);
+			return allcheckedboxes;
+	}
 
 	function check_for_win(){
 		var routes = ['r1','r2','r3','r4','r5','r6','r7','r8'];
@@ -150,6 +166,7 @@ $(document).ready(function(){
 	}
 	m=0;
 	function ai_turn(id,round,picked_boxes){
+		var allcheckedboxes_1 = checkedBoxes();
 		//console.log(id)
 		 routes = ['r1','r2','r3','r4','r5','r6','r7','r8'];
 		 route = {
@@ -250,7 +267,10 @@ $(document).ready(function(){
 		
 	}
 		
-		
+	var allcheckedboxes_2 = checkedBoxes();
+	if(allcheckedboxes_1 == allcheckedboxes_2 && allcheckedboxes_2<9){
+		ai_turn(id,round,picked_boxes);
+	}	
 	}
 	function check_1boxleft_routes(emptyBoxes){
 		var oneBoxLeftRoutes = [];
