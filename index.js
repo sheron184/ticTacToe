@@ -7,6 +7,11 @@ SJTECH Creation
 $(document).ready(function(){
 	round = 0;
 	checked_boxes=[];
+	//fixing height
+	var width = $(".check-box").width();
+	var h = width + 37;
+	var height = h + "px";
+	$(".check-box").css("height",height);
 
 	$(".check-box").on("click",function(){
 		round++;
