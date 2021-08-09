@@ -7,7 +7,7 @@ SJTECH Creation
 $(document).ready(function(){
 	round = 0;
 	checked_boxes=[];
-	//fixing height
+	
 	var width = $(".check-box").width();
 	var h = width + 37;
 	var height = h + "px";
@@ -44,18 +44,15 @@ $(document).ready(function(){
 	function checkedBoxes(){
 		var allcheckedboxes=0;
 			var boxArr = ['#a1','#a2','#a3','#b1','#b2','#b3','#c1','#c2','#c3'];
-			for(var q=0;q<boxArr.length;q++){
-						
+			for(var q=0;q<boxArr.length;q++){	
 					var tt_id = boxArr[q];
-					//console.log(tt_id);
 					var tt_node = $(tt_id).find(".check-node");
 					if(tt_node.length !=0){
 							allcheckedboxes++;
-							console.log("gotvld ");
+						
 					}
 						
 			}
-			console.log(allcheckedboxes);
 			return allcheckedboxes;
 	}
 
@@ -90,8 +87,6 @@ $(document).ready(function(){
 						c++;
 					}
 				}	
-
-				//console.log(ai);
 				if(you>2 && ai>2){
 					console.log('tie');
 					$("#fade").addClass("wrapper");
@@ -109,11 +104,13 @@ $(document).ready(function(){
 					var win_msg = $(".winner").find(".win-msg");
 					var score = $(".score").text();
 					console.log(score);
-					var new_score = parseInt(score) + parseInt(10);
+					 new_score = parseInt(score) + parseInt(10);
 
 					document.getElementById("demo").innerHTML = new_score;
 					$(win_msg).text("Congratulations you have won..!");	
 					//alert("Congratulations you have won..!");
+					var id_au = "winAudio";
+					playAudio(id_au);
 					round=0;
 					break;
 				}
@@ -127,35 +124,35 @@ $(document).ready(function(){
 					var win_msg = $(".winner").find(".win-msg");
 					$(win_msg).text("You lost");
 					console.log('you lost');
+					var id_au = "loseAudio";
+					playAudio(id_au);
 					round=0;
 					break;
 				}
 				if(ai<=2){
 					fails++;
 				}
-				console.log(fails);
+			
 				if(fails==2){
-					console.log("avbe");
+					//console.log("avbe");
 					var allcheckedboxes=0;
 					var boxArr = ['#a1','#a2','#a3','#b1','#b2','#b3','#c1','#c2','#c3'];
 					for(var q=0;q<boxArr.length;q++){
-						
 							var tt_id = boxArr[q];
-							//console.log(tt_id);
 							var tt_node = $(tt_id).find(".check-node");
 							if(tt_node.length !=0){
 								 allcheckedboxes++;
-								 console.log("gotvld ");
 							}
 						
 					}
-					console.log(allcheckedboxes);
 					if(allcheckedboxes==9){
 						console.log("no result");
 						$("#fade").addClass("wrapper");
 						$(".winner").removeClass("hide");
 						var win_msg = $(".winner").find(".win-msg");
 						$(win_msg).text("No Result, Sorry!");
+						var id_au = "winAudio";
+						playAudio(id_au);
 						fails=0;
 						round=0;
 						allcheckedboxes=0;
@@ -170,9 +167,16 @@ $(document).ready(function(){
 			
 	}
 	m=0;
+	times = 0;
+	function playAudio(id){
+		//console.log(id);
+		var x = document.getElementById(id); 
+		x.play();
+		return;
+	}
 	function ai_turn(id,round,picked_boxes){
+		times++;
 		var allcheckedboxes_1 = checkedBoxes();
-		//console.log(id)
 		 routes = ['r1','r2','r3','r4','r5','r6','r7','r8'];
 		 route = {
 			r1 : ['a1','a2','a3'],
@@ -197,20 +201,30 @@ $(document).ready(function(){
 				}
 			}
 		}
-		//console.log(found_paths);
-		rounds = found_paths.length;
+		var rounds = found_paths.length;
 		 check_node = "<div class='check-node'></div>";
-
+		 //console.log(found_paths);
 		if(round==1){
+			var score_1 = $(".score").text();
+			console.log(id);
+			if(id == "c3"){
+				$(check_node).appendTo("#c2");
+				return;
+			}
+			//console.log(rounds);
 			for(var r=0;r<rounds;r++){
 				var path = found_paths[r];
 				for(var t=0;t<3;t++){
 					var node_id = "#" + path[t];
+					
 					var node_1 = $(node_id).find(".check-node");
-					if(node_1.length >0){
+					//console.log(node_1);
+					if(node_1.length !=0){
+						//console.log("found");
 						m++;
 					}
 				}
+				console.log(`${found_paths[r]} = ${m}`);
 				if(m>1){
 					var sel_id_2 = "#" + path[2];
 					var new_nodes = $(sel_id_2).find(".check-node");
@@ -230,20 +244,14 @@ $(document).ready(function(){
 				}
 			}
 	}else if(round>1){
-		//console.log(round);
-		//console.log("yo");
 		if(round==2){
 			var previous_checked_Box = picked_boxes[0];
-			//console.log(previous_checked_Box);
 		}
 		if(round>2){
 			var previous_checked_Box = picked_boxes.pop();
-			//console.log(previous_checked_Box);
 		}
 
-		//console.log(previous_checked_Box);
 		oneboxleft = check_1boxleft_routes(1); // =================>>>(1) getting one box left routes
-		//console.log(oneboxleft);
 
 		if(oneboxleft.length>0){
 			var player = "ai";
@@ -267,23 +275,19 @@ $(document).ready(function(){
 			}
 
 		}
-
-
-		
 	}
 		
-	var allcheckedboxes_2 = checkedBoxes();
-	if(allcheckedboxes_1 == allcheckedboxes_2 && allcheckedboxes_2<9){
-		ai_turn(id,round,picked_boxes);
-	}	
+		var allcheckedboxes_2 = checkedBoxes();
+		//console.log(allcheckedboxes_2);
+		//console.log(round);
+		if(allcheckedboxes_1 == allcheckedboxes_2 && allcheckedboxes_2<9){
+			ai_turn(id,round,picked_boxes);
+		}	
 	}
 	function check_1boxleft_routes(emptyBoxes){
 		var oneBoxLeftRoutes = [];
 		for(i=0;i<8;i++){ 
 			var path = route[routes[i]];
-			//console.log(path);
-			//console.log(path);
-			//var oneBoxLeftRoutes = [];
 			empty=0;
 			for(var boxes=0;boxes<3;boxes++){
 				var bx_id = "#"+path[boxes];
@@ -292,11 +296,8 @@ $(document).ready(function(){
 					empty++;
 				}
 			}
-			//console.log(path);
-			//console.log(empty);
 			if(emptyBoxes==1){
 				if(empty==1){
-					//console.log(path);
 					oneBoxLeftRoutes.push(path);
 				}
 			}else if(emptyBoxes==2){
@@ -306,22 +307,17 @@ $(document).ready(function(){
 			}
 			
 		}
-		//console.log(oneBoxLeftRoutes);
 		return oneBoxLeftRoutes;
 	}
 	function checkTwoOnes(oneboxlefted,player){
-		//console.log("yo");
 		var foundedBoxes = [];
 		for(var i=0;i<oneboxlefted.length;i++){
 			var rt = oneboxlefted[i];
 			var path =rt;
-			//console.log(rt);
-			
 			var found=0;
 			for(var rr=0;rr<3;rr++){
 				var boxId = "#"+ path[rr];
 				var isChecked = $(boxId).find(".check-node");
-				//console.log(isChecked);
 				if(isChecked.length != 0){
 					var boxColor = $(isChecked).css("background-color");
 					//console.log(boxColor);
@@ -334,15 +330,12 @@ $(document).ready(function(){
 							found++;
 						}
 					}
-					
-					//console.log(isChecked);
 				}
 			}
 			if(found>1){
 				foundedBoxes.push(path);
 			}
 		}
-		//console.log(`${foundedBoxes} - ${player}`);
 		return foundedBoxes;
 	}
 	
@@ -363,6 +356,8 @@ $(document).ready(function(){
 		$(".msg").hide();
 	});
 	$(".play-again").on("click",function(){
+		round =0;
+		times = 0;
 		$(".check-node").remove();
 		$(".winner").addClass("hide");
 		$("#fade").removeClass("wrapper");
