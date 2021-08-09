@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TIC TAC TOE</title>
+	<title>Tic Tac Toe</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link rel="icon" href="img.png" type="image" sizes="32x32">
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="index.js"></script>
-	<link rel="icon" href="img.png" type="image" sizes="32x32">
 </head>
 <body>
+	<audio id="winAudio"><source src="beep.wav" type="audio/wav"></audio>
+	<audio id="loseAudio"><source src="lose.wav" type="audio/wav"></audio>
 	<div id="fade">
 		<div class="winner hide shadow-lg">
 			<h6 style="font-size: 25px;" class="win-msg display-4 text-center text-danger"></h6>
@@ -21,10 +21,7 @@
 		</div>
 	</div>
 	<div class="container"><div class="row msg-box"></div></div>
-	<div class="container mt-3">
-		<divclass='p-2'><h4 class='text-center'>TIC TAC TOE !</h4></div>
-	</div>
-	<div class="main-wrapper mt-5 mb-3">
+	<div class="main-wrapper mt-5">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
@@ -43,7 +40,7 @@
 		 				</div>
 					</div>
 				</div>
-				<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 ml-auto mr-auto mt-3">
+				<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 ml-auto mr-auto">
 					<div class="container">
 						<div class="row">
 							<div id="a1" class="col-4 check-box b br-tl"></div>
