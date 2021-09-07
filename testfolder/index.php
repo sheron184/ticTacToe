@@ -1,3 +1,6 @@
+<?php
+echo "php works";
+?>
 <!DOCTYPE html>
 <html>
 <head>
